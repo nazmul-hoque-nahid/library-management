@@ -1,0 +1,17 @@
+package com.example.library_management.repository;
+
+import com.example.library_management.entity.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<User,Long>, JpaSpecificationExecutor<User> {
+    Optional<User>findByEmail(String email);
+    List<User>findByName(String name);
+    boolean existsByEmail(String email);
+    List<User>findByStatus(User.Status status);
+}
