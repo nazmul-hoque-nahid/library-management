@@ -168,19 +168,21 @@ public class UserController {
      UserResponse response=service.updateUser(id,request);
      return ResponseEntity.ok(response);
  }
-  @GetMapping("/search")
-  @PreAuthorize("hasAnyRole('ADMIN','LIBRARIAN')")
-    public ResponseEntity<Page<UserResponse>>search(
-          String name,
-          String email,
-          String membershipNumber,
-          User.Role role,
-          User.Status status,
-          int page,
-          int size
-  ){
-    Page<UserResponse>users=service.search(name,email,membershipNumber,role,status,page,size);
-    return ResponseEntity.of(Optional.ofNullable(users));
-  }
+    @GetMapping("/search")
+    @PreAuthorize("hasAnyRole('ADMIN','LIBRARIAN')")
+    public ResponseEntity<Page<UserResponse>> search(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String membershipNumber,
+            @RequestParam(required = false) User.Role role,
+            @RequestParam(required = false) User.Status status,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        Page<UserResponse> users =
+                service.search(name, email, membershipNumber, role, status, page, size);
+
+        return ResponseEntity.ok(users);
+    }
 
 }
