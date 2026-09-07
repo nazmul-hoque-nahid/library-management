@@ -274,7 +274,15 @@ Similar REST APIs are provided for authors, publishers, and categories.
 # 🐳 Docker
 
 The Spring Boot application is packaged as a Docker image.
-
+### Pull the image:
+Make sure Docker is installed and running, then execute:
+```text
+docker pull nazmulhoque416/library-management:latest
+```
+### Run the application
+```text
+docker run -d --name=inventory-management --network=network_name -e DB_URL=jdbc:mysql://database_link:3306/database_name -e DB_PASSWORD=db_password -e DB_USERNAME=db_username -p 8080:8080 nazmulhoque416/library-management:latest
+```
 Basic deployment flow:
 
 ```text
